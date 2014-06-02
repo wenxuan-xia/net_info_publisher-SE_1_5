@@ -14,7 +14,8 @@
 | path to your installation.
 |
 */
-$config['base_url']	= '';
+$config['base_url']	= 'localhost/';
+//base URL 到时候用这个写超链接
 
 /*
 |--------------------------------------------------------------------------
