@@ -4,6 +4,7 @@ net_info_publisher-SE_1_5
 修改日志
 -------------------------
 > June 2, XWX 创建项目，并作适当css，页面的添加
+> June 9, XWX 基本完成 根据股票代码查询外数据库 功能
 
 
 分工
@@ -42,6 +43,9 @@ net_info_publisher-SE_1_5
 > > 研究 highcharts， 并画出不同时段的曲线，K线...
 > 
 > 联系别的组，获取API，并做自己的信息处理
+> > 根据股票代码查询metadata（XWX完成）
+> > 
+> > 根据股票名字查询metadata 
 > 
 > ajax 5s 刷新子模块价格
 
