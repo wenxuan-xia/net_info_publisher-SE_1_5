@@ -8,6 +8,10 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
+    <script src="../../js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../js/search.js" type="text/javascript"></script>
+
+
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
@@ -46,9 +50,9 @@
             <li><a href="#">最近查看记录</a></li>
             <li><a href="#">退出登录</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input id="search" type="text" class="form-control" placeholder="Search...">
-          </form>
+          <div class="navbar-form navbar-right">
+            <input id="search" type="text" class="form-control" placeholder="输入代码或名称...">
+          </div>
         </div>
       </div>
     </div>
@@ -78,34 +82,16 @@
           
 
           <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                
-              </tbody>
-            </table>
+            
           </div>
-          <div class="sub-header">
-            <button>123</button>
-            <button>123</button>
-            <button>123</button>
-            <button>123</button>
-            <button>123</button>
+
+          <div class="sub-header" align="right">
+            <button class="btn btn-mini btn-primary" type="button">日交易线</button>
+            <button class="btn btn-mini btn-primary" type="button">月交易线</button>
+            <button class="btn btn-mini btn-primary" type="button">年交易线</button>
+            <button class="btn btn-mini btn-info disabled" type="button">日K线</button>
+            <button class="btn btn-mini btn-info" type="button">月K线</button>
+            <button class="btn btn-mini btn-info" type="button">年K线</button>
           </div>
         </div>
       </div>
@@ -114,8 +100,6 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../js/jquery-1.11.1.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../js/docs.min.js"></script>
   </body>
 </html>
