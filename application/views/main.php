@@ -78,12 +78,11 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">股票代号，股票名</h1>
+          <h2 id="name" class="page-header">股票代号&股票名</h2>
           
+          <div id="container" style="min-width:800px;height:400px"><!--植入stock--></div>
 
-          <div class="table-responsive">
-            
-          </div>
+          
 
           <div class="sub-header" align="right">
             <button class="btn btn-mini btn-primary" type="button">日交易线</button>
@@ -100,6 +99,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/highstock.js"></script>
+    <script scr="../../js/exporting.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
   </body>
 </html>
