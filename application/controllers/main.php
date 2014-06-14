@@ -19,14 +19,9 @@ class Main extends CI_Controller {
 	 */
 	public function index()
 	{
-		//$this->load->view('welcome_message');
-		$this->login();
+		$this->load->view('main');
 	}
 
-	public function login()
-	{
-		$this->load->view("main.php");
-	}
 }
 
 /* End of file welcome.php */
