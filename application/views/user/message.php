@@ -34,6 +34,12 @@
 		</div>
 	  </div>
 	  <div class="form-group">
+		<label for="" class="col-sm-3 control-label text-left">余额至</label>
+        <div class="col-sm-9">
+		  <p class="form-control-static"><?php echo $permission;?></p>
+		</div>
+	   </div>
+	  <div class="form-group">
 		<div class="col-sm-offset-1 col-sm-11">
 		  <button type="submit" id="submit" name="submit" value="ok" class="btn btn-primary btn-block btn-lg">保存修改</button>
 		</div>

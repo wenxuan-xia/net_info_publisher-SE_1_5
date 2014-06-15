@@ -230,6 +230,7 @@ class User extends CI_Controller {
 				$message = $this->users->get_user($id);
 				$data['email'] = $message->email;
   				$data['realname'] = $message->realname;
+				$data['permission'] = $message->permission;
 				$this->load->view("html_header");
 				$this->load->view("header/user_header");
 				$this->load->view("user/message",$data);
