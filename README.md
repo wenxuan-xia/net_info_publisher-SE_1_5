@@ -48,6 +48,8 @@ User 说明
 > models
 > > userpermissionmodule
 > > > check() : 判断用户是否拥有权限（是否已充值并有余额），若有余额，返回TRUE，否则返回FALSE
+
+
 分工
 -------------------------
 
