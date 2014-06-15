@@ -1,4 +1,4 @@
-net_info_publisher-SE_1_5
+﻿net_info_publisher-SE_1_5
 =========================
 
 修改日志
@@ -44,6 +44,9 @@ User 说明
 > > > index: 充值界面
 
 > > > log: 充值记录
+
+> > init
+> > > index: 初始化（创建数据库）
 
 ###########
 > libraries:
