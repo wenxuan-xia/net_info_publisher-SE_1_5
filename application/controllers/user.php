@@ -41,19 +41,22 @@ class User extends CI_Controller {
 			}else { //用户此前已登录且未退出
 				$this->users->keeplink();
 				$this->load->view("header/user_header");
-				$this->load->view("main/main");
+			//	$this->load->view("main/main");
 			}
 		} else { //登陆信息提交
-			$this->form_validation->set_rules('username', 'Username', 'required|min_length[6]|max_length[32]|alpha_dash');
-			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[32]|alpha_dash');
+			$this->form_validation->set_rules('username', '用户名', 'required|min_length[6]|max_length[32]|alpha_dash');
+			$this->form_validation->set_rules('password', '密码', 'required|min_length[6]|max_length[32]|alpha_dash');
 			if ($this->form_validation->run() == FALSE){//信息存在问题
 				$this->load->view("header/visiter_header");
-				$this->load->view("user/false");
+				$this->load->view("user/login");
 			} else {//验证无误
 				$res=$this->users->login($name,$pw);
 				if ($res == FALSE) {
+					$data['words'] = "用户名密码错误！";
+					$data['url'] = "/index.php/login";
+					$data['returnstr'] = "重新登陆";
 					$this->load->view("header/visiter_header");
-					$this->load->view("user/fail");
+					$this->load->view("user/fail",$data);
 				} else {
 					$data['words'] = "登陆成功！";
 					$this->load->view("header/user_header");
@@ -63,8 +66,27 @@ class User extends CI_Controller {
 		}
 		
 		$this->load->view("html_footer");
-		
 	}
+	
+	public function logout()
+	{
+		$this->load->model('usermodule','users');
+		$this->load->helper(array('form', 'url'));
+  		$this->load->library(array('form_validation', 'usermanager'));
+  		
+		$name = $this->input->post('username', TRUE);
+		$pw = $this->input->post('password', TRUE);
+		
+		$this->load->view("html_header");
+			
+		if (($id = $this->usermanager->if_login())!=FALSE){
+			$this->users->logout($id);	
+		}
+		$this->load->view("header/visiter_header");
+		$this->load->view("user/login");		
+		$this->load->view("html_footer");
+	}
+	
 	public function register(){
 	
 		$this->load->model('usermodule','users');
@@ -83,12 +105,13 @@ class User extends CI_Controller {
 			$this->load->view("user/register");
 			$this->load->view("html_footer");
 		} else { //注册信息提交
-			$this->form_validation->set_rules('username', 'Username', 'required|min_length[6]|max_length[32]|alpha_dash');
-			$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[32]|alpha_dash');
-			$this->form_validation->set_rules('email', 'Eassword', 'required|valid_email');
+			$this->form_validation->set_rules('username', '用户名', 'required|min_length[6]|max_length[32]|alpha_dash');
+			$this->form_validation->set_rules('password', '密码', 'required|min_length[6]|max_length[32]|alpha_dash|matches[repassword]');
+			$this->form_validation->set_rules('repassword', '密码确认', 'required');
+			$this->form_validation->set_rules('email', '邮箱', 'required|valid_email');
 			if ($this->form_validation->run() == FALSE){//信息存在问题
 				$this->load->view("header/visiter_header");
-				$this->load->view("user/fail");
+				$this->load->view("user/register");
 			} else {//验证无误
 				$res=$this->users->insert_user($name,$pw,$email);
 				if ($res!=FALSE){
@@ -96,8 +119,11 @@ class User extends CI_Controller {
 					$this->load->view("header/user_header");
 					$this->load->view("user/success",$data);
 				} else{
+					$data['words'] = "注册失败，该用户名已存在";
+					$data['url'] = "/index.php/register";
+					$data['returnstr'] = "重新注册";
 					$this->load->view("header/visiter_header");
-					$this->load->view("user/insertfailed");
+					$this->load->view("user/fail",$data);
 				}
 
 			}
@@ -119,12 +145,12 @@ class User extends CI_Controller {
 			$this->load->view("header/visiter_header");
 			$this->load->view("user/password_forget");
 			$this->load->view("html_footer");
-		} else { //注册信息提交
-			$this->form_validation->set_rules('username', 'Username', 'required|min_length[6]|max_length[32]|alpha_dash');
-			$this->form_validation->set_rules('email', 'Eassword', 'required|valid_email');
+		} else { //忘记密码信息提交
+			$this->form_validation->set_rules('username', '用户名', 'required|min_length[6]|max_length[32]|alpha_dash');
+			$this->form_validation->set_rules('email', '邮箱', 'required|valid_email');
 			if ($this->form_validation->run() == FALSE){//信息存在问题
 				$this->load->view("header/visiter_header");
-				$this->load->view("user/checkfail");
+				$this->load->view("user/password_forget");
 			} else {//验证无误
 					$res=$this->users->reset_password_by_email($name,$email);
 				if ($res!=FALSE){
@@ -132,33 +158,61 @@ class User extends CI_Controller {
 					$this->load->view("header/visiter_header");
 					$this->load->view("user/success",$data);
 				} else{
-					$this->load->view($name);
-					$this->load->view($email);
+					$this->load->view("html_header");
+					$this->load->view("header/user_header");
+					$data['words'] = "用户名/邮箱错误！";
+					$data['url'] = "/index.php/user/passwordforget";
+					$data['returnstr'] = "返回";
+					$this->load->view("header/user_header");
+					$this->load->view("user/fail",$data);
 				}
-
 			}
 		}
 		$this->load->view("html_footer");
 	}
+	
 	public function reset(){
 	
 		$this->load->model('usermodule','users');
 		$this->load->helper(array('form', 'url'));
   		$this->load->library(array('form_validation', 'usermanager'));
   		
-		$token = $this->input->get('token', TRUE);
+		$type = $this->input->post('submit', TRUE);
+		if ($type != FALSE){
+			$password = $this->input->post('password', TRUE);
+				$token = $this->input->post('token', TRUE);
+				$this->form_validation->set_rules('password', '密码', 'required|min_length[6]|max_length[32]|alpha_dash|matches[repassword]');
+				$this->form_validation->set_rules('repassword', '密码确认', 'required');
+				if ($this->form_validation->run() == FALSE){//信息存在问题
+					$this->load->view("html_header");
+					$this->load->view("header/visiter_header");
+					$data['token']=$token;
+					$this->load->view("user/reset",$data);
+					$this->load->view("html_footer");
+				} else {
+					$id = $this->users->reset_password_by_token($token);
+					$this->load->view("html_header");
+					$this->load->view("header/visiter_header");
+					if ($id==FALSE){
+						$this->load->view("user/invalid");
+					} else {
+						$this->users->reset_password($id,$password,$token);
+						$data['words'] = "重置密码成功！";
+						$this->load->view("user/success",$data);
+					}
+					$this->load->view("html_footer");
+				}
+			return TRUE;
+		}
 		
+		$token = $this->input->get('token', TRUE);
 		$this->load->view("html_header");
 		$this->load->view("header/visiter_header");
-		if ($token != FALSE){
-			$res=$this->users->reset_password($token);
-			if ($res != FALSE){
-				$this->load->view("header/reset/".$res);
-			} else {
-				$this->load->view("header/invalid");
-			}
+		if (($token != FALSE) && ($this->users->reset_password_by_token($token) != FALSE)){
+			$data['token']=$token;
+			$this->load->view("user/reset",$data);
 		} else {
-			$this->load->view("header/invalid");
+			$this->load->view("user/invalid");
 		}
 		$this->load->view("html_footer");
 	}
@@ -187,33 +241,101 @@ class User extends CI_Controller {
 				$email = $this->input->post('email', TRUE);
 				$realname = $this->input->post('name');
 				if (($newpw!=FALSE) && ($newpw!="")){
-					$this->form_validation->set_rules('newpassword', 'Password', 'required|min_length[6]|max_length[32]|alpha_dash');
-					$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[32]|alpha_dash');
-					if (($this->form_validation->run() == FALSE) ||($newpw != $renewpw)){//信息存在问题
-						$this->load->view("wrong message");
+					$this->form_validation->set_rules('password', '密码', 'required|min_length[6]|max_length[32]|alpha_dash');
+					$this->form_validation->set_rules('newpassword', '新密码', 'required|min_length[6]|max_length[32]|alpha_dash|matches[repassword]');
+					$this->form_validation->set_rules('renewpassword', '新密码确认', 'required');
+					if ($this->form_validation->run() == FALSE){//信息存在问题
+						$this->load->view("html_header");
+						$this->load->view("header/user_header");
+						$data['email'] =$email;
+  						$data['realname'] = $realname;
+						$this->load->view("user/message",$data);
+						$this->load->view("html_footer");
 					} else {
-						$this->load->view($this->users->reset_password($id,$pw,$newpw));
-					/*	if ($this->users->reset_password($id,$pw,$newpw)===TRUE){
-							$this->load->view("reset success");
+						if ($this->users->reset_password_check($id,$pw,$newpw)===TRUE){
+							$data['words'] = "重置密码成功";
+							$this->load->view("html_header");
+							$this->load->view("header/user_header");
+							$this->load->view("user/success",$data);
+							$this->load->view("html_footer");
 						} else {
-							$this->load->view("reset failed");
-						}*/
+							$this->load->view("html_header");
+							$this->load->view("header/user_header");
+							$data['words'] = "密码错误！";
+							$data['url'] = "/index.php/user/message";
+							$data['returnstr'] = "返回";
+							$this->load->view("header/user_header");
+							$this->load->view("user/fail",$data);
+							$this->load->view("html_footer");
+						}
 					}
+					return TRUE;
 				}
-				if ($this->users->update_user($id, $email, $realname)===TRUE){
-					$data['words'] = $realname.",".$newpw;
+				$this->form_validation->set_rules('email', '邮箱', 'required|valid_email');
+				if ($this->form_validation->run() == FALSE){
 					$this->load->view("html_header");
 					$this->load->view("header/user_header");
-					$this->load->view("user/success",$data);
+					$data['email'] =$email;
+  					$data['realname'] = $realname;
+					$this->load->view("user/message",$data);
 					$this->load->view("html_footer");
-					//$this->load->view("header/ok,id:".$id.",email:".$email.",realname:".$realname);
 				} else {
-					$this->load->view("header/updatefail,id:".$id.",email:".$email.",realname:".$realname);
+					if ($this->users->update_user($id, $email, $realname)===TRUE){
+						$data['words'] = "保存信息成功";
+						$this->load->view("html_header");
+						$this->load->view("header/user_header");
+						$this->load->view("user/success",$data);
+						$this->load->view("html_footer");
+						//$this->load->view("header/ok,id:".$id.",email:".$email.",realname:".$realname);
+					} else {
+						$this->load->view("html_header");
+						$this->load->view("header/user_header");
+						$data['words'] = "密码错误！";
+						$data['url'] = "/index.php/user/message";
+						$data['returnstr'] = "返回";
+						$this->load->view("header/user_header");
+						$this->load->view("user/fail",$data);
+						$this->load->view("html_footer");
+					}
 				}
 			}
 		}		
 	}
 	
+	public function searchlog()
+	{
+		$this->showlogs("search");
+	}
+	
+	public function storelog()
+	{
+		$this->showlogs("store");
+	}
+	
+	private function showlogs($type){
+		$this->load->model('usermodule','users');
+		$this->load->library('usermanager');
+		if (!($id = $this->usermanager->if_login())){ //未登录
+			$this->load->view("html_header");
+			$this->load->view("header/visiter_header");
+			$this->load->view("user/login");
+			$this->load->view("html_footer");
+		}else {
+			$this->load->view("html_header");
+			$this->load->view("header/user_header");
+			if ($type == "search"){
+				$res = $this->users->get_log($id);
+				$data['log'] = $res;
+				$this->load->view("user/searchlog",$data);
+			} else if ($type == "store"){
+				$res = $this->users->get_store($id);
+				$data['log'] = $res;
+				$this->load->view("user/storelog",$data);
+			}
+			
+			$this->load->view("html_footer");	
+		}		
+	}
 	
 }
 

@@ -42,6 +42,13 @@ class Usermodule extends CI_Model {
     	return FALSE;
     }
     
+    function logout($id){
+    	$token = $this->session->userdata('token');
+		$this->db->delete('userlogin', array('id' => $id,'token'=>$token)); 
+    	$this->session->unset_userdata('token');
+    	return TRUE;
+    }
+    
     function insert_user($name,$password,$email) //返回插入的信息数组
     {
     	$query = $this->db->get_where('users', array('name' => $name));
@@ -80,15 +87,15 @@ class Usermodule extends CI_Model {
        	 	}
        	 	$config['protocol'] = 'smtp';
 			$config['smtp_host'] = 'smtp.126.com';  
-			$config['smtp_user'] = 'wujinning_c';  
-			$config['smtp_pass'] = '*******';  
+			$config['smtp_user'] = 'se_1_5';  
+			$config['smtp_pass'] = 'net_info';  
 			$config['smtp_port'] = '25';  
 			$config['charset'] = 'utf-8';  
 			$config['wordwrap'] = TRUE;		
 			$config['mailtype'] = 'html';
 			$this->email->initialize($config);
 			
-       	 	$this->email->from('wujinning_c@126.com', 'Jennings Wu');
+       	 	$this->email->from('se_1_5@126.com', 'se_1_5');
 			$this->email->to($email);
 			$this->email->subject('密码重置');
 			$msg="你好,\n你请求重置你在se_1_5网站账户的密码.\n\n如果你没有发过该请求，请忽视本邮件。请勿回复本邮件。\n\n如果你确实发过该请求，请点击以下链接重置密码\nhttp://127.0.0.1/index.php/user/reset?token=".$url_token;
@@ -100,7 +107,7 @@ class Usermodule extends CI_Model {
     	return FALSE;
     }
     
-	function reset_password($id,$password,$newpassword){
+	function reset_password_check($id,$password,$newpassword){
     	$this->db->select('id')->from('users')->where('id', $id)->where('password', $password);
     	$query = $this->db->get();
     	if ($query->num_rows()>0){
@@ -110,6 +117,24 @@ class Usermodule extends CI_Model {
      		if ($this->db->affected_rows()==0)
      			return FALSE;
      		else return TRUE;
+    	}
+    	return FALSE;
+    }
+    
+	function reset_password($id,$password,$token){
+    	$this->db->set('password',$password); 
+    	$this->db->where('id', $id);
+    	$this->db->update('users');
+    	$this->db->delete('reset_url', array('id' => $id,'urltoken'=>$token)); 
+    	return TRUE;
+    }
+    
+	function reset_password_by_token($token){
+    	$this->db->select('id')->from('reset_url')->where('urltoken', $token);
+    	$query = $this->db->get();
+    	if ($query->num_rows()>0){
+    		$res = $query->result();
+     		return $res[0]->id;
     	}
     	return FALSE;
     }
@@ -128,6 +153,18 @@ class Usermodule extends CI_Model {
      //		return FALSE;
      //	else 
      	return TRUE;
+    }
+    
+    function get_log($id){
+    	$query = $this->db->get_where('searchlog', array('userid' => $id));
+    	$res = $query->result();
+    	return $res;
+    }
+    
+	function get_store($id){
+    	$query = $this->db->get_where('searchlog', array('userid' => $id));
+    	$res = $query->result();
+    	return $res;
     }
 
 }?>

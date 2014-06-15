@@ -19,7 +19,18 @@ class Main extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('main');
+		$this->load->library(array('form_validation', 'usermanager'));
+		if (!($id = $this->usermanager->if_login())){ //未登录
+			$this->load->view("html_header");
+			$this->load->view("header/visiter_header");
+			$this->load->view("user/login");
+			$this->load->view("html_footer");
+		}else {
+			$this->load->view("html_header");
+			$this->load->view("header/user_header");
+		//	$this->load->view("main/main");
+			$this->load->view("html_footer");
+		}
 	}
 
 }

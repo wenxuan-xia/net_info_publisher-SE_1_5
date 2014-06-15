@@ -15,5 +15,8 @@
 		</div>
 	  </div>
 	</form>
+	<div class="text-center text-danger">
+		<?php echo form_error('phone'); ?>
+	</div>
 </div>
 

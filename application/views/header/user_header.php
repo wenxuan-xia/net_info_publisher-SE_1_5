@@ -11,10 +11,10 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#" style="color:#FFFFFF">充值</a></li>
-            <li><a href="#">个人信息修改</a></li>
-            <li><a href="#">最近查看记录</a></li>
-            <li><a href="#">退出登录</a></li>
+            <li><a href="/index.php/recharge" style="color:#FFFFFF">充值</a></li>
+            <li><a href="/index.php/user/message">个人信息修改</a></li>
+            <li><a href="/index.php/user/searchlog">最近查看记录</a></li>
+            <li><a href="/index.php/user/logout">退出登录</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input id="search" type="text" class="form-control" placeholder="Search...">

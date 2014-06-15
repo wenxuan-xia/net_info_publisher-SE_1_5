@@ -33,5 +33,11 @@
 		</div>
 	  </div>
 	</form>
+	<div class="text-center text-danger">
+		<?php echo form_error('username'); ?>
+		<?php echo form_error('password'); ?>
+		<?php echo form_error('repassword'); ?>
+		<?php echo form_error('email'); ?>
+	</div>
 </div>
 

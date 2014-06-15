@@ -38,17 +38,19 @@ class Recharge extends CI_Controller {
 				$this->load->view("html_footer");
 			} else {
 				$phone = $this->input->post('phone', TRUE);
-				$this->form_validation->set_rules('phone', 'Phone', 'required|min_length[11]|max_length[11]|numeric');
+				$this->form_validation->set_rules('phone', '手机号', 'required|min_length[11]|max_length[11]|numeric');
 				if ($this->form_validation->run() == FALSE){//信息存在问题
-					$this->load->view("wrong message");
+					$this->load->view("html_header");
+					$this->load->view("header/user_header");
+					$this->load->view("recharge/main");
+					$this->load->view("html_footer");
 				} else {
-					
-					$this->load->view($this->permission->add($id,30,$phone));
-					/*	if ($this->users->reset_password($id,$pw,$newpw)===TRUE){
-							$this->load->view("reset success");
-						} else {
-							$this->load->view("reset failed");
-						}*/
+					$this->permission->add($id,30,$phone);
+					$data['words'] = "充值成功";
+					$this->load->view("html_header");
+					$this->load->view("header/user_header");
+					$this->load->view("user/success",$data);
+					$this->load->view("html_footer");
 				}
 			}
 		}		
