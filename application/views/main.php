@@ -41,7 +41,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color:#ffffff;font-weight:900" href="#">股票交易-网上发布系统</a>
+          <a class="navbar-brand" style="color:#ffffff;font-weight:900" href="/">股票交易-网上发布系统</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -81,7 +81,10 @@
           <h2 id="name" class="page-header">股票代号&股票名</h2>
           
           <div id="container" style="min-width:800px;height:400px"><!--植入stock--></div>
-
+          <input id="stock_id" type="hidden"></input>
+          <input id="stock_name" type="hidden"></input>
+          <input id="search_res" type="hidden"></input>
+          <input id="display_mode" type="hidden"></input>
           
 
           <div class="sub-header" align="right">
@@ -99,6 +102,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script src="../../js/display.js"></script>
     <script src="../../js/highstock.js"></script>
     <script scr="../../js/exporting.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Main extends CI_Controller {
+class Init extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -19,20 +19,13 @@ class Main extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->library(array('form_validation', 'usermanager'));
-		if (!($id = $this->usermanager->if_login())){ //未登录
-			$this->load->view("html_header");
-			$this->load->view("header/visiter_header");
-			$this->load->view("user/login");
-			$this->load->view("html_footer");
-		}else {
-			$this->load->view("html_header");
-			$this->load->view("header/user_header");
-		//	$this->load->view("main/main");
-			$this->load->view("html_footer");
-		}
+		$this->load->model('initmodule','init');
+		$this->init->init_database();
 	}
 
+
+	
+	
 }
 
 /* End of file welcome.php */

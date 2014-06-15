@@ -48,11 +48,17 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = 'mysql:host=localhost;charset=utf8';
 $db['default']['username'] = 'root';
+//<<<<<<< HEAD
 $db['default']['password'] = '123456';
 $db['default']['database'] = 'se';
 $db['default']['dbdriver'] = 'mysql';
+//=======
+$db['default']['password'] = '';
+$db['default']['database'] = 'se_1_5';
+$db['default']['dbdriver'] = 'pdo';
+//>>>>>>> 79ad39c547af112b48ae1a45a8bae19dad5428c2
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
