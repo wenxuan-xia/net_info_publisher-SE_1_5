@@ -94,6 +94,7 @@ class CI_DB_pdo_driver extends CI_DB {
 	function db_connect()
 	{
 		$this->options['PDO::ATTR_ERRMODE'] = PDO::ERRMODE_SILENT;
+		$this->options['PDO::MYSQL_ATTR_INIT_COMMAND'] = 'SET NAMES utf8';
 
 		return new PDO($this->hostname, $this->username, $this->password, $this->options);
 	}
@@ -161,6 +162,10 @@ class CI_DB_pdo_driver extends CI_DB {
 	function db_set_charset($charset, $collation)
 	{
 		// @todo - add support if needed
+        if(!$this->_execute("SET NAMES {$this->char_set}")){
+           return FALSE;
+        }
+                //解决PDO乱码问题
 		return TRUE;
 	}
 

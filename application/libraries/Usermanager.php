@@ -22,7 +22,7 @@ class Usermanager {
     }
 	
 	public function if_login(){
-		return FALSE;
+		//return FALSE;
 		
 		$CI =& get_instance();
 		$token = $CI->session->userdata('token');
@@ -30,6 +30,8 @@ class Usermanager {
 		$sql = "SELECT id FROM userlogin WHERE token = ?";
 		$query = $CI->db->query($sql, array($token));
 		if ($query->num_rows() > 0) {
+			$CI->load->model('usermodule','users');
+			$CI->users->keeplink();
 			$res = $query->result();
 			return $res[0]->id;
 		} else 

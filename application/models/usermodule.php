@@ -13,23 +13,8 @@ class Usermodule extends CI_Model {
         return $query->result();
     }
 
-    function insert_user($name,$password,$email) //返回插入的信息数组
-    {
-    	$query = $this->db->get_where('users', array('name' => $name));
-    	if ($query->num_rows()>0)
-    		return FALSE;
-    		
-		$data = array(
-               'name' => $name ,
-               'password' => $password ,
-               'email' => $email
-            );
-        $query =  $this->db->insert('users', $data);
-        return $query;
-    }
-
-    function get_user($name,$password){
-    	$query = $this->db->get_where('users', array('name' => $name,'password' => $password));
+    function get_user($id){
+    	$query = $this->db->get_where('users', array('id' => $id));
     	if ($query->num_rows()>0){
     		$res = $query->result();
     		return $res[0];
@@ -56,6 +41,22 @@ class Usermodule extends CI_Model {
     	}
     	return FALSE;
     }
+    
+    function insert_user($name,$password,$email) //返回插入的信息数组
+    {
+    	$query = $this->db->get_where('users', array('name' => $name));
+    	if ($query->num_rows()>0)
+    		return FALSE;
+ 
+		$data = array(
+               'name' => $name ,
+               'password' => $password ,
+               'email' => $email
+            );
+        $query =  $this->db->insert('users', $data);
+        return $this->login($name,$password);
+    }
+    
     
     function reset_password_by_email($name,$email){
     	$this->db->select('id')->from('users')->where('name', $name)->where('email', $email);
@@ -99,12 +100,16 @@ class Usermodule extends CI_Model {
     	return FALSE;
     }
     
-	function reset_password($toekn){
-    	$this->db->select('id')->from('reset_url')->where('urltoken', $toekn)->where('validtime > ', date("Y-m-d H:i:s",time()));
+	function reset_password($id,$password,$newpassword){
+    	$this->db->select('id')->from('users')->where('id', $id)->where('password', $password);
     	$query = $this->db->get();
     	if ($query->num_rows()>0){
-    		$res = $query->result();
-    		return $res[0]->id;
+    		$this->db->set('password',$newpassword); 
+    		$this->db->where('id', $id);
+    		$this->db->update('users');
+     		if ($this->db->affected_rows()==0)
+     			return FALSE;
+     		else return TRUE;
     	}
     	return FALSE;
     }
@@ -114,13 +119,15 @@ class Usermodule extends CI_Model {
     	$this->usermanager->keeplink();
     }
     
-    function update_user()
-    {
-        $this->title   = $_POST['title'];
-        $this->content = $_POST['content'];
-        $this->date    = time();
-
-        $query = $this->db->update('entries', $this, array('id' => $_POST['id']));
+    function update_user($id,$email,$realname){
+      	$this->db->set('email',$email); 
+    	$this->db->set('realname', $realname);
+		$this->db->where('id', $id);
+     	$this->db->update('users');
+     //	if ($this->db->affected_rows()==0)
+     //		return FALSE;
+     //	else 
+     	return TRUE;
     }
 
 }?>

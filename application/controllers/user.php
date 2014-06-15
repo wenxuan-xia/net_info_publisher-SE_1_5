@@ -55,8 +55,9 @@ class User extends CI_Controller {
 					$this->load->view("header/visiter_header");
 					$this->load->view("user/fail");
 				} else {
+					$data['words'] = "登陆成功！";
 					$this->load->view("header/user_header");
-					$this->load->view("user/login_success");
+					$this->load->view("user/success",$data);
 				}
 			}
 		}
@@ -91,8 +92,9 @@ class User extends CI_Controller {
 			} else {//验证无误
 				$res=$this->users->insert_user($name,$pw,$email);
 				if ($res!=FALSE){
+					$data['words'] = "注册成功！";
 					$this->load->view("header/user_header");
-					$this->load->view("user/success");
+					$this->load->view("user/success",$data);
 				} else{
 					$this->load->view("header/visiter_header");
 					$this->load->view("user/insertfailed");
@@ -126,8 +128,9 @@ class User extends CI_Controller {
 			} else {//验证无误
 					$res=$this->users->reset_password_by_email($name,$email);
 				if ($res!=FALSE){
-					$this->load->view("header/user_header");
-					$this->load->view("user/$res");
+					$data['words'] = "邮件已发送到邮箱，请查收！";
+					$this->load->view("header/visiter_header");
+					$this->load->view("user/success",$data);
 				} else{
 					$this->load->view($name);
 					$this->load->view($email);
@@ -159,6 +162,59 @@ class User extends CI_Controller {
 		}
 		$this->load->view("html_footer");
 	}
+	
+	public function message(){
+		$this->load->model('usermodule','users');
+		$this->load->helper(array('form', 'url'));
+  		$this->load->library(array('form_validation', 'usermanager'));
+			
+		if (!($id = $this->usermanager->if_login())){ //未登录
+			$this->login();
+		}else {
+			$type = $this->input->post('submit', TRUE);
+			if ($type == FALSE){
+				$message = $this->users->get_user($id);
+				$data['email'] = $message->email;
+  				$data['realname'] = $message->realname;
+				$this->load->view("html_header");
+				$this->load->view("header/user_header");
+				$this->load->view("user/message",$data);
+				$this->load->view("html_footer");
+			} else {
+				$pw = $this->input->post('password', TRUE);
+				$newpw = $this->input->post('newpassword', TRUE);
+				$renewpw = $this->input->post('renewpassword', TRUE);
+				$email = $this->input->post('email', TRUE);
+				$realname = $this->input->post('name');
+				if (($newpw!=FALSE) && ($newpw!="")){
+					$this->form_validation->set_rules('newpassword', 'Password', 'required|min_length[6]|max_length[32]|alpha_dash');
+					$this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[32]|alpha_dash');
+					if (($this->form_validation->run() == FALSE) ||($newpw != $renewpw)){//信息存在问题
+						$this->load->view("wrong message");
+					} else {
+						$this->load->view($this->users->reset_password($id,$pw,$newpw));
+					/*	if ($this->users->reset_password($id,$pw,$newpw)===TRUE){
+							$this->load->view("reset success");
+						} else {
+							$this->load->view("reset failed");
+						}*/
+					}
+				}
+				if ($this->users->update_user($id, $email, $realname)===TRUE){
+					$data['words'] = $realname.",".$newpw;
+					$this->load->view("html_header");
+					$this->load->view("header/user_header");
+					$this->load->view("user/success",$data);
+					$this->load->view("html_footer");
+					//$this->load->view("header/ok,id:".$id.",email:".$email.",realname:".$realname);
+				} else {
+					$this->load->view("header/updatefail,id:".$id.",email:".$email.",realname:".$realname);
+				}
+			}
+		}		
+	}
+	
+	
 }
 
 /* End of file welcome.php */
