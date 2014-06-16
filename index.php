@@ -199,6 +199,7 @@ if (defined('ENVIRONMENT'))
  * And away we go...
  *
  */
+ini_set('display_errors',1);
 require_once BASEPATH.'core/CodeIgniter.php';
 
 /* End of file index.php */
