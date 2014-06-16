@@ -28,7 +28,7 @@ class Main extends CI_Controller {
 		}else {
 			$this->load->view("html_header");
 			$this->load->view("header/user_header");
-		//	$this->load->view("main/main");
+			$this->load->view("main/main_display");
 			$this->load->view("html_footer");
 		}
 	}

@@ -49,6 +49,10 @@ class Initmodule extends CI_Model {
 		$this->dbforge->add_field("attime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP");
 		$this->dbforge->create_table('searchlog', TRUE);
     	
+    	$this->dbforge->add_field("stock_id varchar(11) primary key AUTO_INCREMENT");
+		$this->dbforge->add_field("stock_name varchar(11) NOT NULL");
+		$this->dbforge->add_field("state int NOE NULL");
+		$this->dbforge->create_table('stock_meta', TRUE);
     }
 
 }?>
