@@ -4,14 +4,14 @@
     <h2 class="text-center">用户登陆</h2>
 	<form class="form-horizontal" role="form" method="post" action="/index.php/login" onsubmit="return validate_form(this)">
 	  <div class="form-group">
-		<label for="inputUserName" class="col-sm-2 control-label text-left">用户名</label>
-		<div class="col-sm-10">
+		<label for="inputUserName" class="col-sm-3 control-label text-left">用户名</label>
+		<div class="col-sm-9">
 		  <input type="text" name="username" class="form-control" id="inputUserName" placeholder="User Name">
 		</div>
 	  </div>
 	  <div class="form-group">
-		<label for="inputPassword" class="col-sm-2 control-label text-left">密码</label>
-		<div class="col-sm-10">
+		<label for="inputPassword" class="col-sm-3 control-label text-left">密码</label>
+		<div class="col-sm-9">
 		  <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
 		</div>
 	  </div>
