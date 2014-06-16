@@ -1,4 +1,4 @@
-﻿<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Api_model extends CI_Model {
 
@@ -12,6 +12,7 @@ class Api_model extends CI_Model {
         $query = $this->db->get("stock_meta");
         echo json_encode($query->result());
     }
+
     public function search_name($stock_name) {
         $this->db->like("stock_name", $stock_name);
         $query = $this->db->get("stock_meta");

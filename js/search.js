@@ -1,4 +1,4 @@
-﻿function search_id() {
+function search_id() {
 	stock_id = document.getElementById('search').value;
 	$.get(
 		"index.php/api/code_get_name",
@@ -10,6 +10,7 @@
 			var i;
 			var str = "";
 			length = o.length;
+
 			if (length == 1 && o[0].stock_id==stock_id) {
 				my_id = o[0].stock_id;
 				my_name = o[0].stock_name;
@@ -31,6 +32,7 @@
 		"json"
 	);
 }
+
 
 
 function search_name() {
@@ -65,4 +67,36 @@ function search_name() {
 		},
 		"json"
 	);
+}
+
+$(document).ready(
+	function() {
+		$('#search').keyup(function(e){
+			if(e.keyCode == 13) {
+		        //alert('Enter key was pressed.');
+		        search_id();
+		    } else {
+		    	//search_id();
+		    }
+		});
+
+		stock_id = document.getElementById("stock_id").value;
+		stock_name = document.getElementById("stock_name").value;
+		search_res = document.getElementById("search_res").value;
+		display_mod = document.getElementById("display_mode").value;
+
+		if (stock_id != "") {
+			display_line(stock_id, stock_name);
+			// setInterval(display_line, 5000);
+		}
+		if (search_res != "") search_res_display(search_res);
+	}
+);
+
+
+
+
+function search_res_display(search_res){
+	document.getElementById('search').value = search_res;
+	search_id();
 }

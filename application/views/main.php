@@ -8,6 +8,10 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
+    <script src="../../js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="../../js/search.js" type="text/javascript"></script>
+
+
     <title>Dashboard Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
@@ -37,7 +41,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color:#ffffff;font-weight:900" href="#">股票交易-网上发布系统</a>
+          <a class="navbar-brand" style="color:#ffffff;font-weight:900" href="/">股票交易-网上发布系统</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -46,9 +50,9 @@
             <li><a href="#">最近查看记录</a></li>
             <li><a href="#">退出登录</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input id="search" type="text" class="form-control" placeholder="Search...">
-          </form>
+          <div class="navbar-form navbar-right">
+            <input id="search" type="text" class="form-control" placeholder="输入代码或名称...">
+          </div>
         </div>
       </div>
     </div>
@@ -74,38 +78,22 @@
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">股票代号，股票名</h1>
+          <h2 id="name" class="page-header">股票代号&股票名</h2>
+          
+          <div id="container" style="min-width:800px;height:400px"><!--植入stock--></div>
+          <input id="stock_id" type="hidden"></input>
+          <input id="stock_name" type="hidden"></input>
+          <input id="search_res" type="hidden"></input>
+          <input id="display_mode" type="hidden"></input>
           
 
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                  <th>Header</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1,001</td>
-                  <td>Lorem</td>
-                  <td>ipsum</td>
-                  <td>dolor</td>
-                  <td>sit</td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div>
-          <div class="sub-header">
-            <button>123</button>
-            <button>123</button>
-            <button>123</button>
-            <button>123</button>
-            <button>123</button>
+          <div class="sub-header" align="right">
+            <button class="btn btn-mini btn-primary" type="button">日交易线</button>
+            <button class="btn btn-mini btn-primary" type="button">月交易线</button>
+            <button class="btn btn-mini btn-primary" type="button">年交易线</button>
+            <button class="btn btn-mini btn-info disabled" type="button">日K线</button>
+            <button class="btn btn-mini btn-info" type="button">月K线</button>
+            <button class="btn btn-mini btn-info" type="button">年K线</button>
           </div>
         </div>
       </div>
@@ -114,8 +102,9 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../js/jquery-1.11.1.min.js"></script>
+    <script src="../../js/display.js"></script>
+    <script src="../../js/highstock.js"></script>
+    <script scr="../../js/exporting.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="../../js/docs.min.js"></script>
   </body>
 </html>

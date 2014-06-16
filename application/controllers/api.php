@@ -1,4 +1,4 @@
-﻿<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Api extends CI_Controller {
 
@@ -18,6 +18,7 @@ class Api extends CI_Controller {
 		return json_encode($res);
 	}
 
+
 	public function code_get_name_c()
 	{
 		$info = $this->input->get();
@@ -34,7 +35,6 @@ class Api extends CI_Controller {
 		[1182211200000,17.67],
 		[1182297600000,17.36],
 		[1182384000000,17.70],
-		[1182470400000,17.57],
 		[1182470400000,17.57],
 		[1182729600000,17.48],
 		[1182816000000,17.09],

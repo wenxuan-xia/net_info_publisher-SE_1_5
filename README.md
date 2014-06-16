@@ -4,6 +4,9 @@
 修改日志
 -------------------------
 > June 2, XWX 创建项目，并作适当css，页面的添加
+<<<<<<< HEAD
+> June 9, XWX 基本完成 根据股票代码查询外数据库 功能
+=======
 > June 15 WJN 提交用户部分与充值部分
 
 User 说明
@@ -61,6 +64,7 @@ User 说明
 > models
 > > userpermissionmodule
 > > > check() : 判断用户是否拥有权限（是否已充值并有余额），若有余额，返回TRUE，否则返回FALSE
+>>>>>>> 79ad39c547af112b48ae1a45a8bae19dad5428c2
 
 
 分工
@@ -99,6 +103,9 @@ User 说明
 > > 研究 highcharts， 并画出不同时段的曲线，K线...
 > 
 > 联系别的组，获取API，并做自己的信息处理
+> > 根据股票代码查询metadata（XWX完成）
+> > 
+> > 根据股票名字查询metadata 
 > 
 > ajax 5s 刷新子模块价格
 
