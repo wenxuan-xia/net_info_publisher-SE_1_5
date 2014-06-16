@@ -88,9 +88,9 @@
           
 
           <div class="sub-header" align="right">
-            <button class="btn btn-mini btn-primary" type="button">日交易线</button>
-            <button class="btn btn-mini btn-primary" type="button">月交易线</button>
-            <button class="btn btn-mini btn-primary" type="button">年交易线</button>
+            <button class="btn btn-mini btn-primary" type="button" onclick="javscript: document.getElementById('display_mode').value = 'line_day'">日交易线</button>
+            <button class="btn btn-mini btn-primary" type="button" onclick="javscript: document.getElementById('display_mode').value = 'line_month'">月交易线</button>
+            <button class="btn btn-mini btn-primary" type="button" onclick="javscript: document.getElementById('display_mode').value = 'line_year'">年交易线</button>
             <button class="btn btn-mini btn-info disabled" type="button">日K线</button>
             <button class="btn btn-mini btn-info" type="button">月K线</button>
             <button class="btn btn-mini btn-info" type="button">年K线</button>
