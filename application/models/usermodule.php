@@ -12,7 +12,7 @@ class Usermodule extends CI_Model {
         $query = $this->db->get('entries', 10);
         return $query->result();
     }
-
+	
     function get_user($id){
     	$query = $this->db->get_where('users', array('id' => $id));
     	if ($query->num_rows()>0){
@@ -23,7 +23,7 @@ class Usermodule extends CI_Model {
     }
     
     function login($name,$password){
-    	$this->db->select('id')->from('users')->where('name', $name)->where('password', $password);
+    	$this->db->select('id')->from('users')->where('name', $name)->where('password', md5($password));
     	$query = $this->db->get();
     	if ($query->num_rows()>0){
     		$this->load->helper('string');
@@ -55,9 +55,10 @@ class Usermodule extends CI_Model {
     	if ($query->num_rows()>0)
     		return FALSE;
  
+		$md5pw = md5($password);
 		$data = array(
                'name' => $name ,
-               'password' => $password ,
+               'password' => $md5pw ,
                'email' => $email
             );
         $query =  $this->db->insert('users', $data);
@@ -108,10 +109,10 @@ class Usermodule extends CI_Model {
     }
     
 	function reset_password_check($id,$password,$newpassword){
-    	$this->db->select('id')->from('users')->where('id', $id)->where('password', $password);
+    	$this->db->select('id')->from('users')->where('id', $id)->where('password',  md5($password));
     	$query = $this->db->get();
     	if ($query->num_rows()>0){
-    		$this->db->set('password',$newpassword); 
+    		$this->db->set('password',md5($newpassword)); 
     		$this->db->where('id', $id);
     		$this->db->update('users');
      		if ($this->db->affected_rows()==0)
@@ -122,7 +123,7 @@ class Usermodule extends CI_Model {
     }
     
 	function reset_password($id,$password,$token){
-    	$this->db->set('password',$password); 
+    	$this->db->set('password', md5($password)); 
     	$this->db->where('id', $id);
     	$this->db->update('users');
     	$this->db->delete('reset_url', array('id' => $id,'urltoken'=>$token)); 

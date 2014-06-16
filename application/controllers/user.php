@@ -243,13 +243,15 @@ class User extends CI_Controller {
 				$realname = $this->input->post('name');
 				if (($newpw!=FALSE) && ($newpw!="")){
 					$this->form_validation->set_rules('password', '密码', 'required|min_length[6]|max_length[32]|alpha_dash');
-					$this->form_validation->set_rules('newpassword', '新密码', 'required|min_length[6]|max_length[32]|alpha_dash|matches[repassword]');
+					$this->form_validation->set_rules('newpassword', '新密码', 'required|min_length[6]|max_length[32]|alpha_dash|matches[renewpassword]');
 					$this->form_validation->set_rules('renewpassword', '新密码确认', 'required');
 					if ($this->form_validation->run() == FALSE){//信息存在问题
 						$this->load->view("html_header");
 						$this->load->view("header/user_header");
+						$message = $this->users->get_user($id);
 						$data['email'] =$email;
   						$data['realname'] = $realname;
+						$data['permission'] = $message->permission;
 						$this->load->view("user/message",$data);
 						$this->load->view("html_footer");
 					} else {
@@ -276,8 +278,10 @@ class User extends CI_Controller {
 				if ($this->form_validation->run() == FALSE){
 					$this->load->view("html_header");
 					$this->load->view("header/user_header");
+					$message = $this->users->get_user($id);
 					$data['email'] =$email;
   					$data['realname'] = $realname;
+					$data['permission'] = $message->permission;
 					$this->load->view("user/message",$data);
 					$this->load->view("html_footer");
 				} else {

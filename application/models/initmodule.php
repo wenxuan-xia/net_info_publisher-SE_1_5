@@ -21,8 +21,8 @@ class Initmodule extends CI_Model {
 		$this->dbforge->create_table('users',TRUE);
 		
 		//创建表（储存登陆用户的token）
-		$this->dbforge->add_field("id int primary key AUTO_INCREMENT");
-		$this->dbforge->add_field("token char(32) NOT NULL");
+		$this->dbforge->add_field("id int NOT NULL");
+		$this->dbforge->add_field("token char(32) NOT NULL  primary key ");
 		$this->dbforge->add_field("activetime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
 		$this->dbforge->add_field("countnum int");
 		$this->dbforge->create_table('userlogin', TRUE);
@@ -49,9 +49,9 @@ class Initmodule extends CI_Model {
 		$this->dbforge->add_field("attime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP");
 		$this->dbforge->create_table('searchlog', TRUE);
     	
-    	$this->dbforge->add_field("stock_id varchar(11) primary key AUTO_INCREMENT");
+    	$this->dbforge->add_field("stock_id int primary key AUTO_INCREMENT");
 		$this->dbforge->add_field("stock_name varchar(11) NOT NULL");
-		$this->dbforge->add_field("state int NOE NULL");
+		$this->dbforge->add_field("state int NOT NULL");
 		$this->dbforge->create_table('stock_meta', TRUE);
     }
 
