@@ -2,8 +2,8 @@ function display_line(stock_id = 0, stock_name = 0, method = 'line_day') {
   if (stock_id != 0) {
     document.getElementById('display_mode').value = method;
     var data_url = 'index.php/api/' + method;
-    modify_button_state(method);
     $.getJSON(data_url, function(data) {
+
       $('#container').highcharts('StockChart', {
         rangeSelector : {
           enabled: false

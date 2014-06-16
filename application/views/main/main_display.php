@@ -26,16 +26,19 @@
           <input id="stock_id" type="text"></input>
           <input id="stock_name" type="text"></input>
           <input id="search_res" type="text"></input>
-          <input id="display_mode" type="text"></input>
+          <input id="display_mode" type="text"> </input>
           
 
           <div class="sub-header" align="right">
-            <button class="btn btn-mini btn-primary" type="button">日交易线</button>
-            <button class="btn btn-mini btn-primary" type="button">月交易线</button>
-            <button class="btn btn-mini btn-primary" type="button">年交易线</button>
-            <button class="btn btn-mini btn-info disabled" type="button">日K线</button>
-            <button class="btn btn-mini btn-info" type="button">月K线</button>
-            <button class="btn btn-mini btn-info" type="button">年K线</button>
+
+            <button id='line_day' class='btn btn-mini btn-primary' type='button' onclick="javscript: change_mode('line_day');">日交易线</button>
+            <button id='line_month' class='btn btn-mini btn-primary' type='button' onclick="javscript: change_mode('line_month');">月交易线</button>
+            <button id='line_year' class='btn btn-mini btn-primary' type='button' onclick="javscript: change_mode('line_year');">年交易线</button>
+
+            <button id='k_day' class='btn btn-mini btn-primary' type='button'>日K线</button>
+            <button id='k_month' class='btn btn-mini btn-primary' type='button' visable>月K线</button>
+            <button id='k_year' class='btn btn-mini btn-primary' type='button'>年K线</button>
+
           </div>
         </div>
       </div>
