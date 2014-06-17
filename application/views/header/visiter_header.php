@@ -7,7 +7,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" style="color:#ffffff;font-weight:900" href="#">股票交易-网上发布系统</a>
+          <a class="navbar-brand" style="color:#ffffff;font-weight:900" href="/">股票交易-网上发布系统</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">

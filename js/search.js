@@ -18,6 +18,7 @@ function search_id() {
 				document.getElementById("search_res").value = "";
 				document.getElementById("display_mode").value = "line_day";
 				display_line(my_id, my_name, "line_day");
+				insert_search_log(stock_id, stock_name);
 			} else {
 				document.getElementById('name').innerHTML = "查询结果";
 				for(i=0; i<length; i++) {
@@ -69,3 +70,5 @@ function search_name() {
 		"json"
 	);
 }
+
+

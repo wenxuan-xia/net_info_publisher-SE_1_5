@@ -23,6 +23,13 @@ $(document).ready(
 	}
 );
 
+
+$(document).ready(
+	function() {
+		load_search_log();
+	}
+);
+
 function reflash_guard(){
 	stock_id = document.getElementById("stock_id").value;
 	stock_name = document.getElementById("stock_name").value;
@@ -53,3 +60,4 @@ function search_res_display(search_res){
 	else 
 		search_id();
 }
+

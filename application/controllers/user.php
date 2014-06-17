@@ -307,6 +307,20 @@ class User extends CI_Controller {
 		}		
 	}
 	
+
+	public function add_search_log() {
+		$info = $this->input->get();
+		$this->load->model('usermodule', '', TRUE);
+		$this->usermodule->add_search_log($info['uid'], $info['stock_id'], $info['stock_name']);
+	}
+
+	public function load_search_logs() {
+		$info = $this->input->get();
+		$this->load->model('usermodule', '', TRUE);
+		$result = $this->usermodule->load_search_logs($info['uid']);
+		echo json_encode($result);
+	}
+
 	public function searchlog()
 	{
 		$this->showlogs("search");

@@ -49,6 +49,17 @@ class Initmodule extends CI_Model {
 		$this->dbforge->add_field("attime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP");
 		$this->dbforge->create_table('searchlog', TRUE);
     	
+		//创建收藏记录表 （根据实际情况修改）
+		$this->dbforge->add_field("id int primary key AUTO_INCREMENT");
+		$this->dbforge->add_field("userid int NOT NULL");
+		$this->dbforge->add_field("code char(32) NOT NULL");
+		$this->dbforge->add_field("attime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP");
+		$this->dbforge->create_table("bookmark", TRUE);
+
+    	/**
+		outer tables for temp_use
+    	**/
+   		//创建stock_metax表，实际上是外数据库，仅仅在这里模拟
     	$this->dbforge->add_field("stock_id int primary key AUTO_INCREMENT");
 		$this->dbforge->add_field("stock_name varchar(11) NOT NULL");
 		$this->dbforge->add_field("state int NOT NULL");

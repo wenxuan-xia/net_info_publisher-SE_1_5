@@ -29,6 +29,7 @@ class Main extends CI_Controller {
 			$this->load->model('userpermissionmodule','permission');
 			$permission = $this->permission->check($id);
 			$data['permission'] = $permission;
+			$data['id'] = $id;
 			$this->load->view("html_header", $data);
 			$this->load->view("header/user_header");
 			$this->load->view("main/main_display");

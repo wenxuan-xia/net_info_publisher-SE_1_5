@@ -3,20 +3,19 @@
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul id="sda" class="nav nav-sidebar">
-            <li class="active"><a href="#">history search</a></li>
-            ...
+            <li class="active"><a href="#">历史记录</a></li>
+            <li><a href="" id="log0">Another nav item</a></li>
+            <li><a href="" id="log1">Nav item again</a></li>
+            <li><a href="" id="log2">One more nav</a></li>
+            <li><a href="" id="log3">Another nav item</a></li>
+            <li><a href="" id="log4">Another nav item</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <li class="active"><a href="">bookmark</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
+            <li><a href="" id="mark1">Nav item again</a></li>
+            <li><a href="" id="mark2">One more nav</a></li>
+            <li><a href="" id="mark3">Another nav item</a></li>
+            <li><a href="" id="mark4">More navigation</a></li>
           </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -27,6 +26,7 @@
           <input id="stock_name" type="text"></input>
           <input id="search_res" type="text"></input>
           <input id="display_mode" type="text"> </input>
+          <input id="user_id" type="text" value = "<?php echo $id;?>"> </input>
           
 
           <div class="sub-header" align="right">
