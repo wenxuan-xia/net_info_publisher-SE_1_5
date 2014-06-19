@@ -1,3 +1,4 @@
+<!--用户注册时的页面主体-->
 <script src="/dist/js/inputCheck.js"></script>
 
 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 main">
@@ -33,6 +34,9 @@
 		</div>
 	  </div>
 	</form>
+<!--
+	输出错误信息
+-->
 	<div class="text-center text-danger">
 		<?php echo form_error('username'); ?>
 		<?php echo form_error('password'); ?>

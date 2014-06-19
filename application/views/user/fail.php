@@ -1,3 +1,4 @@
+<!--操作失败页面的主体-->
 <script src="/dist/js/inputCheck.js"></script>
 
 
