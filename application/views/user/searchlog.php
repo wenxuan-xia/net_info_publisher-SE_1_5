@@ -1,9 +1,12 @@
+<!--显示查询列表时的页面主体-->
 <script src="/dist/js/inputCheck.js"></script>
 
 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 main">
     <h2 class="text-center">查询记录</h2>
 
-
+<!--
+	以表格形式显示历史查询列表
+-->
 	<div class="table-responsive">
 	  <table class="table table-hover text-center">
 		<thead>

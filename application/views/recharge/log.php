@@ -1,9 +1,12 @@
+<!--充值记录页面的主体-->
 <script src="/dist/js/inputCheck.js"></script>
 
 <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 main">
     <h2 class="text-center">充值记录</h2>
 
-
+<!--
+	以表格形式显示充值列表
+-->
 	<div class="table-responsive">
 	  <table class="table table-hover text-center">
 		<thead>

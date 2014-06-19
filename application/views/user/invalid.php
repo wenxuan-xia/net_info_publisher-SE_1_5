@@ -1,3 +1,4 @@
+<!--重置密码失效页面的主体-->
 <script src="/dist/js/inputCheck.js"></script>
 
 
