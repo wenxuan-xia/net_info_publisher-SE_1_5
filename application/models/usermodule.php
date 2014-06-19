@@ -76,16 +76,18 @@ class Usermodule extends CI_Model {
     		$id = $res[0]->id;
     		$valid_time = date("Y-m-d H:i:s",strtotime("+1 day"));
     		$url_token = random_string('alnum',32);
-            $this->db->set('id', $id); 
-            $this->db->set('urltoken', $url_token); 
-            $this->db->set('validtime', $valid_time); 
-       	 	$query =  $this->db->insert('reset_url');
-       	 	if ($this->db->affected_rows()==0){
-            	$this->db->set('urltoken', $url_token); 
+			$this->db->select('id')->from('rest_url')->where('id', $id);
+			if ($query->num_rows()>0){
+				$this->db->set('urltoken', $url_token); 
             	$this->db->set('validtime', $valid_time);
 				$this->db->where('id', $id);
        	 		$this->db->update('reset_url');
-       	 	}
+			} else {
+				$this->db->set('id', $id); 
+				$this->db->set('urltoken', $url_token); 
+				$this->db->set('validtime', $valid_time); 
+				$query =  $this->db->insert('reset_url');
+			}
        	 	$config['protocol'] = 'smtp';
 			$config['smtp_host'] = 'smtp.126.com';  
 			$config['smtp_user'] = 'se_1_5';  
