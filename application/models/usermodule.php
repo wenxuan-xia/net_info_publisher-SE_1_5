@@ -169,25 +169,25 @@ class Usermodule extends CI_Model {
     }
 
     function add_search_log($uid, $stock_id, $stock_name) {
-        // if ($stock_name == "") return;
+        if ($stock_name == "") return;
         $this->db->where("userid", $uid);
         $this->db->where("code", $stock_id);
-        // $this->db->where("name", $stock_name);
+        $this->db->where("name", $stock_name);
         $query = $this->db->get("searchlog");
 
         if ($query->num_rows() == 0) {
             $this->db->set("userid", $uid);
             $this->db->set("code", $stock_id);
-            // $this->db->set("name", $stock_name);
+            $this->db->set("name", $stock_name);
             $this->db->insert("searchlog");
         } else {
             $this->db->where("userid", $uid);
             $this->db->where("code", $stock_id);
-            // $this->db->where("name", $stock_name);
+            $this->db->where("name", $stock_name);
             $this->db->delete("searchlog");
             $this->db->set("userid", $uid);
             $this->db->set("code", $stock_id);
-            // $this->db->set("name", $stock_name);
+            $this->db->set("name", $stock_name);
             $this->db->insert("searchlog");
         }
     }
@@ -197,7 +197,7 @@ class Usermodule extends CI_Model {
             "SELECT searchlog.code, stock_meta.stock_name, searchlog.attime 
             FROM searchlog, stock_meta 
             WHERE searchlog.userid = " .$uid. " AND searchlog.code = stock_meta.stock_id  
-            ORDER BY searchlog.attime DESC LIMIT 0,5");
+            ORDER BY searchlog.attime DESC LIMIT 0,10");
         $result = $query->result();
         return $result;
     }

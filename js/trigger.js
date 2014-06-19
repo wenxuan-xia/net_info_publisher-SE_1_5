@@ -23,7 +23,7 @@ $(document).ready(
 	}
 );
 
-
+//查找log
 $(document).ready(
 	function() {
 		load_search_log();
@@ -37,7 +37,11 @@ function reflash_guard(){
 	display_mode = document.getElementById("display_mode").value;
 
 	if (stock_id != "") {
-		display_line(stock_id, stock_name, display_mode);	
+		if (display_mode[0] != 'k') {
+			display_line(stock_id, stock_name, display_mode);	
+		} else {
+			display_candle(stock_id, stock_name, display_mode);
+		}
 		if (setInterval_int == 0) {
 			setInterval_int = setInterval(reflash_guard,5000);
 		}

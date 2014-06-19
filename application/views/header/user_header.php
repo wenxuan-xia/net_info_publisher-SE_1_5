@@ -16,9 +16,6 @@
             <li><a href="/index.php/user/searchlog">最近查看记录</a></li>
             <li><a href="/index.php/user/logout">退出登录</a></li>
           </ul>
-          <div class="navbar-form navbar-right">
-            <input id="search" type="text" class="form-control" placeholder="输入代码或名称...">
-          </div>
         </div>
       </div>
     </div>

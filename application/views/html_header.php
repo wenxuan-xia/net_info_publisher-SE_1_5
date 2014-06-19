@@ -27,6 +27,7 @@
     <script src="../../js/jquery-1.8.3.min.js"></script>
     <?php
         if (isset($permission)) {
+            var_dump($permission);
             if ($permission) {
                 echo "<script src='../../js/button.js'></script>";
             } else {
