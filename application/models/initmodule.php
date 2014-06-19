@@ -62,8 +62,10 @@ class Initmodule extends CI_Model {
    		//创建stock_metax表，实际上是外数据库，仅仅在这里模拟
     	$this->dbforge->add_field("stock_id int primary key AUTO_INCREMENT");
 		$this->dbforge->add_field("stock_name varchar(11) NOT NULL");
+		$this->dbforge->add_field("currency varchar(11) NOT NULL");
+		$this->dbforge->add_field("price double NOT NULL");
+		$this->dbforge->add_field("volume int NOT NULL");
 		$this->dbforge->add_field("state int NOT NULL");
 		$this->dbforge->create_table('stock_meta', TRUE);
     }
-
 }?>

@@ -26,19 +26,21 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           
-          <h2 id="name" class="page-header">股票代号&股票名</h2>
+          <h2 id="name" class="page-header">通知说明</h2>
+          <div id="metadata"></div>
+          <div id="container" style="min-width:800px;height:400px">
+            请在左上角输入框，直接输入代号或名称进行使用
+          </div>
           
-          <div id="container" style="min-width:800px;height:400px"></div>
-          
 
 
 
 
-          <input id="stock_id" type="text"></input>
-          <input id="stock_name" type="text"></input>
-          <input id="search_res" type="text"></input>
-          <input id="display_mode" type="text"> </input>
-          <input id="user_id" type="text" value = "<?php echo $id;?>"> </input>
+          <input id="stock_id" type="hidden"></input>
+          <input id="stock_name" type="hidden"></input>
+          <input id="search_res" type="hidden"></input>
+          <input id="display_mode" type="hidden"> </input>
+          <input id="user_id" type="hidden" value = "<?php echo $id;?>"> </input>
           
 
           <div class="sub-header" align="right">
