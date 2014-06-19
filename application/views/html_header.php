@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>股票交易系统--网上信息发布子系统</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -28,12 +28,14 @@
     <?php
         if (isset($permission)) {   //对于用户的权限判断，载入不同JS
             var_dump($permission);
-            if ($permission) {
+            if (! $permission) {
                 echo "<script src='../../js/button.js'></script>";
             } else {
                 echo "<script src='../../js/payed_button.js'></script>";
                 echo "<script src='../../js/payed_display.js'></script>";
             }
+        } else {
+            echo "fool";
         }
     ?>
   </head>
