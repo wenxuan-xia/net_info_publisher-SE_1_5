@@ -76,7 +76,8 @@ class Usermodule extends CI_Model {
     		$id = $res[0]->id;
     		$valid_time = date("Y-m-d H:i:s",strtotime("+1 day"));
     		$url_token = random_string('alnum',32);
-			$this->db->select('id')->from('rest_url')->where('id', $id);
+			$this->db->select('id')->from('reset_url')->where('id', $id);
+			$query = $this->db->get();
 			if ($query->num_rows()>0){
 				$this->db->set('urltoken', $url_token); 
             	$this->db->set('validtime', $valid_time);
@@ -101,13 +102,13 @@ class Usermodule extends CI_Model {
        	 	$this->email->from('se_1_5@126.com', 'se_1_5');
 			$this->email->to($email);
 			$this->email->subject('密码重置');
-			$msg="你好,\n你请求重置你在se_1_5网站账户的密码.\n\n如果你没有发过该请求，请忽视本邮件。请勿回复本邮件。\n\n如果你确实发过该请求，请点击以下链接重置密码\nhttp://127.0.0.1/index.php/user/reset?token=".$url_token;
+			$msg="你好,\n你请求重置你在se_1_5网站账户的密码.\n\n如果你没有发过该请求，请忽视本邮件。请勿回复本邮件。\n\n如果你确实发过该请求，请点击以下链接重置密码\nhttp://115.29.19.220:3000/index.php/user/reset?token=".$url_token;
 			$send_msg = str_replace("\"", "", $msg);
 			$this->email->message($send_msg);
-			$this->email->send();
-    		return $email;
-    	}
-    	return FALSE;
+    		return $this->email->send();
+    	} else {
+			return "wrong";
+		}
     }
     
 	function reset_password_check($id,$password,$newpassword){

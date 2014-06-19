@@ -154,9 +154,19 @@ class User extends CI_Controller {
 			} else {//验证无误
 					$res=$this->users->reset_password_by_email($name,$email);
 				if ($res!=FALSE){
-					$data['words'] = "邮件已发送到邮箱，请查收！";
-					$this->load->view("header/visiter_header");
-					$this->load->view("user/success",$data);
+					if ($res === "wrong"){
+						$this->load->view("html_header");
+						$this->load->view("header/user_header");
+						$data['words'] = "发送失败,请重试";
+						$data['url'] = "/index.php/user/passwordforget";
+						$data['returnstr'] = "返回";
+						$this->load->view("header/user_header");
+						$this->load->view("user/fail",$data);
+					} else {
+						$data['words'] = "邮件已发送到邮箱，请查收！";
+						$this->load->view("header/visiter_header");
+						$this->load->view("user/success",$data);
+					}
 				} else{
 					$this->load->view("html_header");
 					$this->load->view("header/user_header");
@@ -335,10 +345,7 @@ class User extends CI_Controller {
 		$this->load->model('usermodule','users');
 		$this->load->library('usermanager');
 		if (!($id = $this->usermanager->if_login())){ //未登录
-			$this->load->view("html_header");
-			$this->load->view("header/visiter_header");
-			$this->load->view("user/login");
-			$this->load->view("html_footer");
+			$this->login();
 		}else {
 			$this->load->view("html_header");
 			$this->load->view("header/user_header");
@@ -352,7 +359,7 @@ class User extends CI_Controller {
 				$this->load->view("user/storelog",$data);
 			}
 			
-			$this->load->view("html_footer");	
+			$this->load->view("html_footer");
 		}		
 	}
 	
