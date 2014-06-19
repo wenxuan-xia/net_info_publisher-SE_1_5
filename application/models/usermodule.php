@@ -97,18 +97,18 @@ class Usermodule extends CI_Model {
 			$config['charset'] = 'utf-8';  
 			$config['wordwrap'] = TRUE;		
 			$config['mailtype'] = 'html';
-			$this->email->initialize($config);
-			
+			$res = $this->email->initialize($config);
        	 	$this->email->from('se_1_5@126.com', 'se_1_5');
 			$this->email->to($email);
 			$this->email->subject('密码重置');
-			$msg="你好,\n你请求重置你在se_1_5网站账户的密码.\n\n如果你没有发过该请求，请忽视本邮件。请勿回复本邮件。\n\n如果你确实发过该请求，请点击以下链接重置密码\nhttp://115.29.19.220:3000/index.php/user/reset?token=".$url_token;
+			$msg="你好,\n你请求重置你在se_1_5网站账户的密码.\n\n如果你没有发过该请求，请忽视本邮件。请勿回复本邮件。\n\n如果你确实发过该请求，请点击以下链接重置密码\nhttp://127.0.0.1/index.php/user/reset?token=".$url_token;
 			$send_msg = str_replace("\"", "", $msg);
 			$this->email->message($send_msg);
     		return $this->email->send();
     	} else {
 			return "wrong";
 		}
+
     }
     
 	function reset_password_check($id,$password,$newpassword){

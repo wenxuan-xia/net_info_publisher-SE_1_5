@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+//模拟的是外数据库的接口
 class Api extends CI_Controller {
 
 	public function index()
@@ -9,7 +9,7 @@ class Api extends CI_Controller {
 	}
 
 	public function code_get_name()
-	{
+	{		//股票代号获取股票信息
 		$info = $this->input->get();
 		$stock_id = $info['stock_id'];
 		$this->load->model('api_model', '', TRUE);
@@ -20,7 +20,7 @@ class Api extends CI_Controller {
 
 
 	public function code_get_name_c()
-	{
+	{		//股票名称获取股票信息
 		$info = $this->input->get();
 		$stock_name = $info['stock_name'];
 		$this->load->model('api_model', '', TRUE);
@@ -30,7 +30,7 @@ class Api extends CI_Controller {
 	}
 	
 	public function line_day()
-	{
+	{		//模拟返回日线，实际上是在外接口
 		$jQuery = [[1182124800000,17.87],
 		[1182211200000,17.67],
 		[1182211300000,17.36],
@@ -45,7 +45,7 @@ class Api extends CI_Controller {
 	}
 	
 	public function line_month()
-	{
+	{		//模拟返回月线，实际上是在外接口
 		$jQuery = [[1182124800000,13.87],
 		[1182211200000,17.67],
 		[1182211300000,13.36],
@@ -60,7 +60,7 @@ class Api extends CI_Controller {
 	}
 
 	public function line_year()
-	{
+	{		//模拟返回年线，实际上是在外接口
 		$jQuery = [[1182124800000,13.87],
 		[1182211200000,17.67],
 		[1182211300000,13.36],
@@ -76,6 +76,7 @@ class Api extends CI_Controller {
 
 
 	public function k_day() {
+		//模拟返回日K线，实际上是在外接口
 		$jQuery = [
 		/* May 2006 */
 		[1147651200000,67.37,68.38,67.12,67.79],
@@ -94,6 +95,7 @@ class Api extends CI_Controller {
 	}
 
 	public function k_month() {
+		//模拟返回月K线，实际上是在外接口
 		$jQuery = [
 		/* May 2006 */
 		[1147651200000,67.37,68.38,67.12,67.79],
@@ -112,6 +114,7 @@ class Api extends CI_Controller {
 	}
 
 	public function k_year() {
+		//模拟返回年K线，实际上是在外接口
 		$jQuery = [
 		/* May 2006 */
 		[1147651200000,67.37,68.38,67.12,67.79],

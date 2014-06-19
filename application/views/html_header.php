@@ -26,7 +26,7 @@
     <![endif]-->
     <script src="../../js/jquery-1.8.3.min.js"></script>
     <?php
-        if (isset($permission)) {
+        if (isset($permission)) {   //对于用户的权限判断，载入不同JS
             var_dump($permission);
             if ($permission) {
                 echo "<script src='../../js/button.js'></script>";
