@@ -33,11 +33,11 @@
           </div>
           
 
-          <input id="stock_id" type="text/"></input>
-          <input id="stock_name" type="text/"></input>
-          <input id="search_res" type="text/"></input>
-          <input id="display_mode" type="text/"> </input>
-          <input id="user_id" type="text/" value = "<?php echo $id;?>"> </input>
+          <input id="stock_id" type="hidden"></input>
+          <input id="stock_name" type="hidden"></input>
+          <input id="search_res" type="hidden"></input>
+          <input id="display_mode" type="hidden"> </input>
+          <input id="user_id" type="hidden" value = "<?php echo $id;?>"> </input>
           
           <div class="sub-header" align="right">
 

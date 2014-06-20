@@ -52,10 +52,8 @@ function reflash_guard(){	//5s刷新的具体方法
 		search_res_display(search_res);	//如果搜索不为空，则显示搜索
 		clearInterval(setInterval_int); //取消自动更新
 		setInterval_int = 0;			//进程号清空
+		set_default();					//取消图线显示
 	}
-	//  else {
-	// 	search_res_display(stock_id);	//如果搜索为空，则说明stock_id可能不为空，做显示
-	// }
 }
 
 
@@ -73,3 +71,10 @@ function search_res_display(search_res){
 		search_id();
 }
 
+
+//取消图线显示
+function set_default() {
+	document.getElementById("name").innerHTML = "通知说明";
+	document.getElementById("metadata").innerHTML = "";
+	document.getElementById("container").innerHTML = "<p>请在左上角输入框，直接输入代号或名称进行使用</p>";
+}
