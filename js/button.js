@@ -27,7 +27,7 @@ function modify_button_state(state = "line_day") {
 	if (state == "line_year") document.getElementById('line_year').className = 'btn btn-mini btn-primary disabled'; 
 }
 
-function change_mode(state = "line_day") {
+function change_mode(state) {
 	//根据用户的点击，作出相应的显示响应
 	document.getElementById('display_mode').value = state;
 	modify_button_state(state);
