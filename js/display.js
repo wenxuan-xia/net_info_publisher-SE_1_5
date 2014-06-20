@@ -56,6 +56,10 @@ function set_name(stock_id) {
             str = str + "停牌";
           }
           document.getElementById("metadata").innerHTML = str;
+      document.getElementById("stock_id").value = o[0].stock_id;
+      document.getElementById("stock_name").value = o[0].stock_name;
+      document.getElementById("search_res").value = "";
+      // alert(setInterval_int);
     },
     "json"
   );

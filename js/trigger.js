@@ -48,13 +48,14 @@ function reflash_guard(){	//5s刷新的具体方法
 			setInterval_int = setInterval(reflash_guard,5000);	//获取自动刷新进程的进程号
 		}
 	}
-	if (search_res != "") {
+	if (stock_id == "") {
 		search_res_display(search_res);	//如果搜索不为空，则显示搜索
 		clearInterval(setInterval_int); //取消自动更新
 		setInterval_int = 0;			//进程号清空
-	} else {
-		search_res_display(stock_id);	//如果搜索为空，则说明stock_id可能不为空，做显示
 	}
+	//  else {
+	// 	search_res_display(stock_id);	//如果搜索为空，则说明stock_id可能不为空，做显示
+	// }
 }
 
 
