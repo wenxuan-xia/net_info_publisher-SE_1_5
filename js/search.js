@@ -98,7 +98,10 @@ function search_name() {
 					//更改隐藏input，便于刷新访问
 				} else if ((length != 0) && (len != 0)) {//如果长度不符合,判定为搜索
 					for(i=0; i<length; i++) {
-						str = str + "<li><a href=#>" + o[i].stock_id +"-" + o[i].stock_name + "</a></li>"
+						str = str + "<li><a href=\"javascript:display_line(";
+						str = str + o[i].stock_id + ", 0, 'line_day'";
+						str = str + ");\">"
+						str = str + o[i].stock_id +"-" + o[i].stock_name + "</a></li>"
 					}
 					document.getElementById("result").innerHTML = str;
 					document.getElementById("search_res").value = stock_id;

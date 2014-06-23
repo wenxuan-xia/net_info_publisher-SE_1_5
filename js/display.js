@@ -23,9 +23,9 @@
         }],
         //series:图上的点的冒泡内容
         xAxis: {
-        type: 'datetime',
+        type: 'timestamp',
           min: 1182211200000, //待确定
-          max: 1182211800000
+          max: 1182311200000
        },
         //axis:规定坐标范围
         chart: {animation : false},

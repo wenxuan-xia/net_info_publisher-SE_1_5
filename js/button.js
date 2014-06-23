@@ -18,20 +18,25 @@ function modify_button_state(state = "line_day") {
 	document.getElementById('line_day').className = 'btn btn-mini btn-primary'; 
 	document.getElementById('line_month').className = 'btn btn-mini btn-primary'; 
 	document.getElementById('line_year').className = 'btn btn-mini btn-primary'; 
-	document.getElementById('k_day').className = 'btn btn-mini btn-primary disabled'; 
+	document.getElementById('k_day').className = 'btn btn-mini btn-primary'; 
 	document.getElementById('k_month').className = 'btn btn-mini btn-primary disabled'; 
 	document.getElementById('k_year').className = 'btn btn-mini btn-primary disabled';
 
 	if (state == "line_day") document.getElementById('line_day').className = 'btn btn-mini btn-primary disabled'; 
 	if (state == "line_month") document.getElementById('line_month').className = 'btn btn-mini btn-primary disabled'; 
 	if (state == "line_year") document.getElementById('line_year').className = 'btn btn-mini btn-primary disabled'; 
+	if (state == "k_day") 	document.getElementById('k_day').className = 'btn btn-mini btn-primary disabled'; 
 }
 
 function change_mode(state) {
 	//根据用户的点击，作出相应的显示响应
 	document.getElementById('display_mode').value = state;
 	modify_button_state(state);
-	stock_id = document.getElementById('stock_id');
-	stock_name = document.getElementById('stock_name');
-	display_line(stock_id, stock_name, state);//这里不需要判断K线，因为不涉及
+	stock_id = document.getElementById('stock_id').value;
+	stock_name = document.getElementById('stock_name').value;
+	if (state == 'k_day') {	//是否是K线的判断
+		display_candle(stock_id, stock_name, state);
+	}  else {
+		display_line(stock_id, stock_name, state)
+	}
 }
