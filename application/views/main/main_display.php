@@ -2,11 +2,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul id="tit" class="nav nav-sidebar">
-            <li>
+          
               <input id="search" type="text" class="form-control" placeholder="输入代码或名称...">
-            </li>
-          </ul>
+           
           <ul id="result" class="nav nav-sidebar">
             
           </ul>
